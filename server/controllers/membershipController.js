@@ -1,6 +1,5 @@
 const Membership = require("../models/Membership");
 
-// Add user to team with role
 const addUserToTeam = async (req, res) => {
   try {
     const { userId, teamId, roleId } = req.body;
@@ -17,7 +16,6 @@ const addUserToTeam = async (req, res) => {
   }
 };
 
-// Remove user from team
 const removeUserFromTeam = async (req, res) => {
   try {
     const { userId, teamId } = req.body;
@@ -33,7 +31,6 @@ const removeUserFromTeam = async (req, res) => {
   }
 };
 
-// Assign or update role
 const assignRole = async (req, res) => {
   try {
     const { userId, teamId, roleId } = req.body;

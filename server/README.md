@@ -8,7 +8,7 @@ Users can belong to multiple teams and have different roles in each team. Permis
 ---
 
 ## Core Concept
-**User + Team → Role → Permissions**
+**User + Team => Role => Permissions**
 
 ---
 
@@ -105,7 +105,7 @@ npm run dev
 Permission enforcement is handled via middleware:
 
 ```js
-protect → checkPermission("ACTION")
+protect => checkPermission("ACTION")
 ```
 
 ---

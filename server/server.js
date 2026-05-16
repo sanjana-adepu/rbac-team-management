@@ -11,23 +11,15 @@ const membershipRoutes = require("./routes/membershipRoutes");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 
-// Load env vars
 dotenv.config();
 
-// Connect DB
 connectDB();
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 app.use(cors());
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
-// Routes
 app.use("/api/users", userRoutes);
 app.use("/api/teams", teamRoutes);
 app.use("/api/roles", roleRoutes);

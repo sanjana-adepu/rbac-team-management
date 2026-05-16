@@ -2,8 +2,6 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const generateToken = require("../utils/generateToken");
 
-// @desc Register user
-// @route POST /api/auth/register
 const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -35,8 +33,6 @@ const registerUser = async (req, res) => {
   }
 };
 
-// @desc Login user
-// @route POST /api/auth/login
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;

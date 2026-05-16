@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useTeam } from "../context/TeamContext";
 import {useAuth} from "../context/AuthContext";
 
-const Dashboard = () => {
+const Memberships = () => {
   const [memberships, setMemberships] = useState([]);
   const navigate = useNavigate();
   const { setTeam } = useTeam();
@@ -89,4 +89,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Memberships;

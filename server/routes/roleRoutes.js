@@ -7,13 +7,10 @@ const {
   assignPermissionsToRole,
 } = require("../controllers/roleController");
 
-// Create role
 router.post("/", createRole);
 
-// Get roles
 router.get("/", getRoles);
 
-// Assign permissions
 router.put("/:roleId/permissions", assignPermissionsToRole);
 
 module.exports = router;

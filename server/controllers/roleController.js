@@ -1,6 +1,5 @@
 const Role = require("../models/Role");
 
-// Create role
 const createRole = async (req, res) => {
   try {
     const { name, permissions } = req.body;
@@ -16,7 +15,6 @@ const createRole = async (req, res) => {
   }
 };
 
-// Get roles
 const getRoles = async (req, res) => {
   try {
     const roles = await Role.find().populate("permissions");
@@ -26,7 +24,6 @@ const getRoles = async (req, res) => {
   }
 };
 
-// Assign permissions to role
 const assignPermissionsToRole = async (req, res) => {
   try {
     const { roleId } = req.params;

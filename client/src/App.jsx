@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
+import Memberships from "./pages/Memberships";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Teams from "./pages/Teams";
 import Tasks from "./pages/Tasks";
@@ -17,7 +17,7 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Memberships />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/tasks" element={<Tasks />} />
         </Route>

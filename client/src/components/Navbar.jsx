@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography variant="h6">Task Management</Typography>
+        <Typography variant="h6">Team Manager</Typography>
 
         {user && (
           <Stack direction="row" spacing={2}>

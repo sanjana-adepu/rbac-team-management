@@ -6,6 +6,7 @@ const Team = require("../models/Team");
 const Role = require("../models/Role");
 const Permission = require("../models/Permission");
 const Membership = require("../models/Membership");
+const Task = require("../models/Task");
 
 const seedData = async () => {
   try {
@@ -17,6 +18,7 @@ const seedData = async () => {
       Role.deleteMany(),
       Permission.deleteMany(),
       Membership.deleteMany(),
+      Task.deleteMany(),
     ]);
 
     console.log("Old data deleted");
@@ -28,7 +30,6 @@ const seedData = async () => {
       { name: "EDIT_TASK" },
       { name: "DELETE_TASK" },
       { name: "VIEW_ONLY" },
-
       { name: "CREATE_USER" },
       { name: "EDIT_USER" },
       { name: "DELETE_USER" },
@@ -43,7 +44,7 @@ const seedData = async () => {
     const roles = await Role.insertMany([
       {
         name: "Admin",
-        permissions: Object.values(permMap), // all 8
+        permissions: Object.values(permMap),
       },
       {
         name: "Manager",
@@ -65,28 +66,28 @@ const seedData = async () => {
       roleMap[r.name] = r._id;
     });
 
-    const users = await User.insertMany([
-      { name: "Alice", email: "alice@test.com", password },
-      { name: "Bob", email: "bob@test.com", password },
-      { name: "Charlie", email: "charlie@test.com", password },
-      { name: "David", email: "david@test.com", password },
-      { name: "Eve", email: "eve@test.com", password },
+    const usersData = [];
+    for (let i = 1; i <= 15; i++) {
+      usersData.push({
+        name: `User${i}`,
+        email: `user${i}@test.com`,
+        password,
+      });
+    }
 
-      { name: "NoTeam1", email: "not1@test.com", password },
-      { name: "NoTeam2", email: "not2@test.com", password },
-    ]);
+    const users = await User.insertMany(usersData);
 
     const userMap = {};
     users.forEach((u) => {
-      userMap[u.name] = u._id;
+      userMap[u.email] = u._id;
     });
 
-
     const teams = await Team.insertMany([
-      { name: "Alpha" },
-      { name: "Beta" },
-      { name: "Gamma" },
-      { name: "Delta" },
+      { name: "Frontend Team" },
+      { name: "Backend Team" },
+      { name: "Data Modelling Team" },
+      { name: "Design Team" },
+      { name: "PR Team" },
     ]);
 
     const teamMap = {};
@@ -94,48 +95,70 @@ const seedData = async () => {
       teamMap[t.name] = t._id;
     });
 
-
     await Membership.insertMany([
-      {
-        user: userMap.Alice,
-        team: teamMap.Alpha,
-        role: roleMap.Admin,
-      },
+      // Frontend
+      { user: userMap["user1@test.com"], team: teamMap["Frontend Team"], role: roleMap.Admin },
+      { user: userMap["user2@test.com"], team: teamMap["Frontend Team"], role: roleMap.Manager },
+      { user: userMap["user3@test.com"], team: teamMap["Frontend Team"], role: roleMap.Viewer },
 
-      {
-        user: userMap.Alice,
-        team: teamMap.Beta,
-        role: roleMap.Viewer,
-      },
+      // Backend
+      { user: userMap["user4@test.com"], team: teamMap["Backend Team"], role: roleMap.Admin },
+      { user: userMap["user5@test.com"], team: teamMap["Backend Team"], role: roleMap.Manager },
+      { user: userMap["user6@test.com"], team: teamMap["Backend Team"], role: roleMap.Viewer },
 
-      {
-        user: userMap.Bob,
-        team: teamMap.Alpha,
-        role: roleMap.Manager,
-      },
+      // Data
+      { user: userMap["user7@test.com"], team: teamMap["Data Modelling Team"], role: roleMap.Manager },
+      { user: userMap["user8@test.com"], team: teamMap["Data Modelling Team"], role: roleMap.Viewer },
 
-      {
-        user: userMap.Bob,
-        team: teamMap.Gamma,
-        role: roleMap.Viewer,
-      },
+      // Design
+      { user: userMap["user9@test.com"], team: teamMap["Design Team"], role: roleMap.Admin },
+      { user: userMap["user10@test.com"], team: teamMap["Design Team"], role: roleMap.Viewer },
 
-      {
-        user: userMap.Charlie,
-        team: teamMap.Alpha,
-        role: roleMap.Viewer,
-      },
+      // PR
+      { user: userMap["user11@test.com"], team: teamMap["PR Team"], role: roleMap.Manager },
+      { user: userMap["user12@test.com"], team: teamMap["PR Team"], role: roleMap.Viewer },
 
-      {
-        user: userMap.David,
-        team: teamMap.Delta,
-        role: roleMap.Manager,
-      },
+      // Multi-team
+      { user: userMap["user13@test.com"], team: teamMap["Frontend Team"], role: roleMap.Viewer },
+      { user: userMap["user13@test.com"], team: teamMap["Backend Team"], role: roleMap.Viewer },
 
+    ]);
+
+    await Task.insertMany([
       {
-        user: userMap.Eve,
-        team: teamMap.Gamma,
-        role: roleMap.Admin,
+        title: "Build UI components",
+        team: teamMap["Frontend Team"],
+        createdBy: userMap["user1@test.com"],
+      },
+      {
+        title: "Fix navbar bug",
+        team: teamMap["Frontend Team"],
+        createdBy: userMap["user2@test.com"],
+      },
+      {
+        title: "Setup API routes",
+        team: teamMap["Backend Team"],
+        createdBy: userMap["user4@test.com"],
+      },
+      {
+        title: "Optimize DB queries",
+        team: teamMap["Backend Team"],
+        createdBy: userMap["user5@test.com"],
+      },
+      {
+        title: "Design schema",
+        team: teamMap["Data Modelling Team"],
+        createdBy: userMap["user7@test.com"],
+      },
+      {
+        title: "Create UI mockups",
+        team: teamMap["Design Team"],
+        createdBy: userMap["user9@test.com"],
+      },
+      {
+        title: "Prepare release notes",
+        team: teamMap["PR Team"],
+        createdBy: userMap["user11@test.com"],
       },
     ]);
 

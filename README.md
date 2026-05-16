@@ -132,7 +132,7 @@ Default password:
 - Material UI components
 - Reusable table component
 - Team cards
-- Task DataGrid
+- Tasks Table
 - Toast notifications
 
 ---
@@ -153,7 +153,7 @@ Default password:
 ---
 
 ## Future Improvements
-- Deployment (Render + Netlify)
+- Deployment (Netlify)
 - Pagination
 - Global admin role
 - Notifications

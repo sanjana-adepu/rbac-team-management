@@ -1,6 +1,5 @@
 const Task = require("../models/Task");
 
-// Create task
 const createTask = async (req, res) => {
   try {
     const { title, description, teamId } = req.body;
@@ -18,7 +17,6 @@ const createTask = async (req, res) => {
   }
 };
 
-// Get tasks for a team
 const getTasks = async (req, res) => {
   try {
     const { teamId } = req.query;
@@ -31,7 +29,6 @@ const getTasks = async (req, res) => {
   }
 };
 
-// Update task
 const updateTask = async (req, res) => {
     try {
       const { taskId } = req.params;
@@ -53,7 +50,6 @@ const updateTask = async (req, res) => {
     }
   };
   
-  // Delete task
   const deleteTask = async (req, res) => {
     try {
       const { taskId } = req.params;

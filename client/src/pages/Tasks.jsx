@@ -67,6 +67,7 @@ const Tasks = () => {
       const res = await API.get(`/tasks?teamId=${team._id}`);
       setTasks(res.data);
     } catch (err) {
+      console.log(err);
       toast.error("Failed to fetch tasks");
     }
   };
@@ -86,6 +87,7 @@ const Tasks = () => {
       toast.success("Task created");
       fetchTasks();
     } catch (err) {
+      console.log(err);
       toast.error("Create failed");
     }
   };
@@ -96,6 +98,7 @@ const Tasks = () => {
       toast.success("Deleted");
       fetchTasks();
     } catch (err) {
+      console.log(err);
       toast.error("Delete failed");
     }
   };
@@ -116,6 +119,7 @@ const Tasks = () => {
       setEditOpen(false);
       fetchTasks();
     } catch (err) {
+      console.log(err);
       toast.error("Update failed");
     }
   };
@@ -150,11 +154,14 @@ const Tasks = () => {
   ];
 
   return (
-    <Box p={3}>
+    <div style={{margin:"5px"}}>
+      <Box p={3}>
+    <div style={{marginBottom:"10px"}}>
       <Typography variant="h5" mb={2}>
         Tasks - {team?.name}
       </Typography>
-
+      </div>
+      <div style={{marginBottom:"10px"}}>
       {canCreate && (
         <Stack direction="row" spacing={2} mb={2}>
           <TextField
@@ -168,6 +175,7 @@ const Tasks = () => {
           </Button>
         </Stack>
       )}
+      </div>
 
       <Table columns={columns} data={tasks} />
 
@@ -191,6 +199,7 @@ const Tasks = () => {
         </DialogActions>
       </Dialog>
     </Box>
+    </div>
   );
 };
 
