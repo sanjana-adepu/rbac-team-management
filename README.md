@@ -41,7 +41,7 @@ server/ → Node.js backend
 
 ### 1. Clone repository
 ```bash
-git clone <repo_url>
+git clone https://github.com/sanjana-adepu/rbac-team-management
 ```
 
 ---
